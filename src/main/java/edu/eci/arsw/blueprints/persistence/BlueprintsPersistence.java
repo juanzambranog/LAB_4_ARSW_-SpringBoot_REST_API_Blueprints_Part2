@@ -35,13 +35,12 @@ public interface BlueprintsPersistence {
 
 
 
-    /*documentar*/
 
     Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException;
-    /*documentar*/
 
     Set<Blueprint> getAllBlueprints();
 
+    public void updateBlueprint(Blueprint bp) throws BlueprintPersistenceException;
 
 
 }

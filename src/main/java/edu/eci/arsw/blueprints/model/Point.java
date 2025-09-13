@@ -54,7 +54,6 @@ public class Point {
         return Objects.hash(x, y);
     }
 
-    // Opcional: para mostrar valores legibles en logs y tests
     @Override
     public String toString() {
         return "Point(" + x + "," + y + ")";

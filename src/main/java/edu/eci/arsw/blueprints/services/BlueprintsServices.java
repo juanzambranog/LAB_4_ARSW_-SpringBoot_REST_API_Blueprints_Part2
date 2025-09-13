@@ -26,10 +26,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class BlueprintsServices {
 
-    // Dependencia para la persistencia de planos
     private final BlueprintsPersistence persistence;
 
-    // Dependencia para aplicar filtros
     private final BluePrintFilter filter;
 
     /**
@@ -89,6 +87,26 @@ public class BlueprintsServices {
             filtered.add(filter.filter(bp));
         }
         return filtered;
+    }
+
+    /**
+     * Update an existing blueprint
+     * @param author blueprint's author
+     * @param bpname blueprint's name
+     * @param blueprint new blueprint data
+     * @throws BlueprintNotFoundException if the blueprint doesn't exist
+     * @throws BlueprintPersistenceException if there's an error updating
+     */
+    public void updateBlueprint(String author, String bpname, Blueprint blueprint)
+            throws BlueprintNotFoundException, BlueprintPersistenceException {
+
+        Blueprint existingBlueprint = persistence.getBlueprint(author, bpname);
+
+        if (existingBlueprint == null) {
+            throw new BlueprintNotFoundException("Blueprint not found: " + author + "/" + bpname);
+        }
+
+        persistence.updateBlueprint(blueprint);
     }
 }
 
